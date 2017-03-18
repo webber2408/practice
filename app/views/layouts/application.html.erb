@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Practice</title>
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+<%= link_to 'Home' , '/' %><br>
+<% if producer_signed_in? %>
+Hello Producer :   <%= current_producer.email %>
+<%= link_to 'Profile' , edit_producer_registration_path %>
+<%= link_to 'Log Out' , destroy_producer_session_path ,method: :delete %>
+<% else %>
+<h1>Producer</h1>
+<%= link_to 'Log In' , new_producer_session_path %>
+<%= link_to 'Sign Up', new_producer_registration_path %>
+<% end %>
+<% if user_signed_in? %>
+Hello Consumer :   <%= current_user.email %>
+<%= link_to 'Profile' , edit_user_registration_path %>
+<%= link_to 'Log Out' , destroy_user_session_path ,method: :delete %>
+<% else %>
+<h1>Consumer</h1>
+<%= link_to 'Log In' , new_user_session_path %>
+<%= link_to 'Sign Up', new_user_registration_path %>
+<% end %>
+<%= yield %>
+
+</body>
+</html>
